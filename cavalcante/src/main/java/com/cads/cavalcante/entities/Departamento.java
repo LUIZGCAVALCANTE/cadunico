@@ -49,9 +49,13 @@ public class Departamento {
     }
 
 
+    public List<Usuario> getUsuario() {
+        return usuario;
+    }
 
-
-
+    public void setUsuario(List<Usuario> usuario) {
+        this.usuario = usuario;
+    }
 
     @Override
     public String toString() {

@@ -18,6 +18,7 @@ public class CavalcanteApplication implements CommandLineRunner {
 
 
 		System.out.println("Seja bem vindo ao domus");
+		System.out.println("Acesso exclusivo a membros");
 
 
 
