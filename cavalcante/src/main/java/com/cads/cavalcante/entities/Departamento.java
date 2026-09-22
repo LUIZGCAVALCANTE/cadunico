@@ -10,11 +10,11 @@ import java.util.List;
 public class Departamento {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String setor;
-    String unidade;
+    private Long id;
+    private  String setor;
+    private  String unidade;
 
-    @OneToMany(mappedBy="usuario")
+    @OneToMany(mappedBy="departamento")
     private List < Usuario > usuario = new ArrayList<>();
 
     public Departamento(){
