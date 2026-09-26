@@ -13,10 +13,9 @@ public class UsuarioDTO {
     private String cargo;
 
 
-    public UsuarioDTO(Long id, String Nome, String CPF, String email, String password, String cargo){
+    public UsuarioDTO( String Nome, String CPF, String email, String password, String cargo){
 
 
-    this.id=id;
     this.Nome= Nome;
     this.CPF = CPF;
     this.email= email;
