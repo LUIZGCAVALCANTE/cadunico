@@ -30,7 +30,12 @@ private UsuarioRepository userRepository;
         return new UsuarioDTO(user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
     }
 
+public void delete(Long id){
+     
+     userRepository.deleteById(id);
 
+
+}
 
     public List<UsuarioDTO> findAll(){
 
@@ -48,3 +53,5 @@ private UsuarioRepository userRepository;
 
      return users;
 }}
+
+
