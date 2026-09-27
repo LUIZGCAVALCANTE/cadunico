@@ -31,7 +31,23 @@ private UsuarioRepository userRepository;
         return new UsuarioDTO(user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
     }
 
-public void delete(Long id){
+// atualizar usuario
+
+    public UsuarioDTO update(UsuarioDTO userDTO, Long id){
+
+        Usuario user = userRepository.getReferenceById(id);
+
+    user.setNome(userDTO.getNome());
+    user.setCPF(userDTO.getCPF());
+    user.setEmail(userDTO.getEmail());
+    user.setPassword(userDTO.getPassword());
+    user.setCargo(userDTO.getCargo());
+        return new UsuarioDTO(user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
+
+    }
+
+
+    public void delete(Long id){
 
      userRepository.deleteById(id);
 
@@ -69,6 +85,14 @@ public UsuarioDTO findById(Long id){
     }
 
      return users;
-}}
+}
+
+
+
+
+
+
+
+}
 
 
