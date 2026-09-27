@@ -6,6 +6,9 @@ import com.cads.cavalcante.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UsuarioService {
 @Autowired
@@ -29,6 +32,19 @@ private UsuarioRepository userRepository;
 
 
 
+    public List<UsuarioDTO> findAll(){
+
+     List<Usuario> usuarios = userRepository.findAll();
+     List<UsuarioDTO> users = new ArrayList<>();
+
+     for( Usuario usuario : usuarios){
+
+         UsuarioDTO userDTO =  new UsuarioDTO ( usuario.getNome(), usuario.getCPF(), usuario.getEmail(),
+                 usuario.getPassword(), usuario.getCargo());
+         users.add(userDTO);
 
 
-}
+    }
+
+     return users;
+}}
