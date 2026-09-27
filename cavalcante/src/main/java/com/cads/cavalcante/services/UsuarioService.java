@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
 @Autowired
 private UsuarioRepository userRepository;
 
-
+// criar usuario
 
  public UsuarioDTO insert (UsuarioDTO usuarioDTO){
 
@@ -31,12 +32,28 @@ private UsuarioRepository userRepository;
     }
 
 public void delete(Long id){
-     
+
      userRepository.deleteById(id);
 
 
 }
+// buscar por id
+public UsuarioDTO findById(Long id){
 
+    Optional<Usuario> result = userRepository.findById(id);
+
+     if (result.isEmpty()){
+
+        throw new RuntimeException("Usuario não localizado" + id);
+
+     }
+
+     Usuario usuario = result.get();
+     return new UsuarioDTO(usuario.getNome(), usuario.getCPF(),usuario.getEmail(),usuario.getPassword(),usuario.getCargo());
+}
+
+
+//buscar todos usuarios
     public List<UsuarioDTO> findAll(){
 
      List<Usuario> usuarios = userRepository.findAll();
