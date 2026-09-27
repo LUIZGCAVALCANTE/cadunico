@@ -2,7 +2,7 @@ package com.cads.cavalcante.services;
 
 import com.cads.cavalcante.DTO.UsuarioDTO;
 import com.cads.cavalcante.entities.Usuario;
-import com.cads.cavalcante.repository.UsuarioRepository;
+import com.cads.cavalcante.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

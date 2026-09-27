@@ -1,4 +1,4 @@
-package com.cads.cavalcante.repository;
+package com.cads.cavalcante.repositories;
 
 import com.cads.cavalcante.entities.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
