@@ -5,14 +5,14 @@ import com.cads.cavalcante.entities.Usuario;
 public class UsuarioDTO {
 
 
-    private Long id;
     private String Nome;
     private String CPF;
     private String email;
     private String password;
     private String cargo;
 
-
+    public UsuarioDTO() {
+    }
     public UsuarioDTO( String Nome, String CPF, String email, String password, String cargo){
 
 
@@ -27,7 +27,6 @@ public class UsuarioDTO {
 
     public UsuarioDTO(Usuario entity) {
 
-        id =entity.getId();
         Nome=entity.getNome();
         CPF = entity.getCPF();
         email=entity.getEmail();
@@ -75,11 +74,4 @@ public class UsuarioDTO {
         this.cargo = cargo;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
