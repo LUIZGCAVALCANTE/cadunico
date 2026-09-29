@@ -29,6 +29,29 @@ public class UsuarioController {
 
     }
 
+    //
+
+
+    @GetMapping("single/{id}")
+    public UsuarioDTO findById(@PathVariable Long id){
+
+
+        return userService.findById(id);
+    }
+
+@DeleteMapping ("del/{id}")
+public void delete(@PathVariable Long id){
+
+        userService.delete(id);
+
+}
+
+@PutMapping ("att/{id}")
+public UsuarioDTO update(@PathVariable UsuarioDTO userDTO, Long id){
+
+        return userService.update(userDTO,  id);
+
+}
 
 
 }
