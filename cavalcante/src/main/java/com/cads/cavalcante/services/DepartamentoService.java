@@ -1,8 +1,11 @@
 package com.cads.cavalcante.services;
 
 import com.cads.cavalcante.DTO.DepartamentoDTO;
+import com.cads.cavalcante.DTO.UsuarioDTO;
 import com.cads.cavalcante.entities.Departamento;
+import com.cads.cavalcante.entities.Usuario;
 import com.cads.cavalcante.repositories.DepartamentoRepository;
+import com.cads.cavalcante.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,11 @@ public class DepartamentoService  {
     @Autowired
 private DepartamentoRepository departRepository;
 
+
+
+    @Autowired
+    private UsuarioRepository userRepository;
+
 //criar departamento
 public DepartamentoDTO insert(DepartamentoDTO departamentoDTO){
 
@@ -26,7 +34,7 @@ public DepartamentoDTO insert(DepartamentoDTO departamentoDTO){
 
     depart = departRepository.save(depart);
 
-    return new DepartamentoDTO(depart.getSetor(), depart.getUnidade());
+    return new DepartamentoDTO(depart.getSetor(), depart.getUnidade(), depart.getId());
 
 }
 
@@ -40,12 +48,12 @@ public DepartamentoDTO insert(DepartamentoDTO departamentoDTO){
         depart.setUnidade(departDTO.getUnidade());
 
 
-        return new DepartamentoDTO(depart.getSetor(), depart.getUnidade());
+        return new DepartamentoDTO(depart.getSetor(), depart.getUnidade(), depart.getId());
 
 
     }
 
-//deletar usuario
+//deletar departamento
 
     public void delete(Long id){
 
@@ -70,7 +78,7 @@ public DepartamentoDTO findByid(Long id){
 
     Departamento depart = result.get();
 
-    return new DepartamentoDTO(depart.getSetor(), depart.getUnidade());
+    return new DepartamentoDTO(depart.getSetor(), depart.getUnidade(), depart.getId());
 
 }
 
@@ -87,7 +95,7 @@ public DepartamentoDTO findByid(Long id){
 
         for(Departamento depart: departs){
 
-            DepartamentoDTO departDTO = new DepartamentoDTO (depart.getSetor(), depart.getUnidade());
+            DepartamentoDTO departDTO = new DepartamentoDTO (depart.getSetor(), depart.getUnidade(), depart.getId());
 
             deparDTO.add(departDTO);
 
@@ -98,5 +106,46 @@ return deparDTO;
 
 
     }
+    public Departamento findBySetorAndUnidade(String setor, String unidade) {
+
+
+    return departRepository.findBySetorAndUnidade(setor, unidade).orElseThrow(()->
+                new RuntimeException ("departamento inexistente"));
+
+    }
+    //depart&funcionarios
+
+    public List<DepartamentoDTO> findALL() {
+
+        List<Departamento> departs = departRepository.findAll();
+        List<DepartamentoDTO> deptDTO = new ArrayList<>();
+
+
+
+
+        for (Departamento depart : departs) {
+            DepartamentoDTO departDTO = new DepartamentoDTO(depart.getSetor(),
+                    depart.getUnidade(), depart.getId());
+            deptDTO.add(departDTO);
+        }
+        return deptDTO;
+
+    }
+
+
+    public Departamento findByNome(String setor, String unidade) {
+
+
+
+        System.out.println("Setor recebido: [" + setor + "]");
+        System.out.println("Unidade recebida: [" + unidade + "]");
+        return departRepository.findBySetorAndUnidade(setor, unidade)
+                .orElseThrow(() ->
+                        new RuntimeException("Departamento inexistente")
+                );
+    }
+
+
 
 }
+

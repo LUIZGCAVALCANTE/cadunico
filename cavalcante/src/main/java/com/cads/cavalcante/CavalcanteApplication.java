@@ -21,6 +21,12 @@ public class CavalcanteApplication implements CommandLineRunner {
 		System.out.println("Acesso exclusivo a membros");
 
 		System.out.println("CAVALCANTE OWNA");
+		System.out.println("Marcola me deve  ?");
+
+
+
+
+
 
 	}
 }

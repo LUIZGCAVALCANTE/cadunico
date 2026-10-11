@@ -27,7 +27,7 @@ public class ProdutosService {
 
         product = productRepository.save(product);
 
-        return new ProdutosDTO (product.getNome());
+        return new ProdutosDTO (product.getId(), product.getNome());
 
     }
 
@@ -40,7 +40,7 @@ public class ProdutosService {
         produtos.setNome(productDTO.getNome());
 
 
-        return new ProdutosDTO(produtos.getNome());
+        return new ProdutosDTO( produtos.getId(), produtos.getNome());
 
     }
         //dell produtos
@@ -64,7 +64,7 @@ public class ProdutosService {
 
             Produtos products = result.get();
 
-            return new ProdutosDTO(products.getNome());
+            return new ProdutosDTO(products.getId(), products.getNome());
 
         }
 
@@ -80,7 +80,7 @@ public class ProdutosService {
 
 
         for (Produtos produto : produt) {
-            ProdutosDTO produtDTO = new ProdutosDTO(produto.getNome());
+            ProdutosDTO produtDTO = new ProdutosDTO(produto.getId(), produto.getNome()  );
             pdto.add(produtDTO);
         }
         return pdto;

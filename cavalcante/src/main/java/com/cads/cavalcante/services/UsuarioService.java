@@ -1,7 +1,10 @@
 package com.cads.cavalcante.services;
 
+import com.cads.cavalcante.DTO.DepartamentoDTO;
 import com.cads.cavalcante.DTO.UsuarioDTO;
+import com.cads.cavalcante.entities.Departamento;
 import com.cads.cavalcante.entities.Usuario;
+import com.cads.cavalcante.repositories.DepartamentoRepository;
 import com.cads.cavalcante.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,20 +18,41 @@ public class UsuarioService {
 @Autowired
 private UsuarioRepository userRepository;
 
+    @Autowired
+    private DepartamentoRepository departRepository;
+
+    @Autowired
+    private DepartamentoService depService;
+
+
+
+
+
+
 // criar usuario
 
- public UsuarioDTO insert (UsuarioDTO usuarioDTO){
+ public UsuarioDTO insert (UsuarioDTO usuarioDTO,  DepartamentoDTO departDTO ){
 
         Usuario user = new Usuario();
-
         user.setNome(usuarioDTO.getNome());
         user.setCPF(usuarioDTO.getCPF());
         user.setEmail(usuarioDTO.getEmail());
         user.setPassword(usuarioDTO.getPassword());
         user.setCargo(usuarioDTO.getCargo());
-    user=  userRepository.save(user);
 
-        return new UsuarioDTO(user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
+
+
+    Departamento departamento =
+            depService.findByNome(departDTO.getSetor(), departDTO.getUnidade());
+    user.setDepartamento(departamento);
+
+
+
+
+
+        user=  userRepository.save(user);
+
+        return new UsuarioDTO(user.getId(),user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
     }
 
 // atualizar usuario
@@ -42,7 +66,7 @@ private UsuarioRepository userRepository;
     user.setEmail(userDTO.getEmail());
     user.setPassword(userDTO.getPassword());
     user.setCargo(userDTO.getCargo());
-        return new UsuarioDTO(user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
+        return new UsuarioDTO(user.getId(), user.getNome(),user.getCPF(),user.getEmail(),user.getPassword(),user.getCargo());
 
     }
 
@@ -65,7 +89,7 @@ public UsuarioDTO findById(Long id){
      }
 
      Usuario usuario = result.get();
-     return new UsuarioDTO(usuario.getNome(), usuario.getCPF(),usuario.getEmail(),usuario.getPassword(),usuario.getCargo());
+     return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getCPF(),usuario.getEmail(),usuario.getPassword(),usuario.getCargo());
 }
 
 
@@ -77,9 +101,11 @@ public UsuarioDTO findById(Long id){
 
      for( Usuario usuario : usuarios){
 
-         UsuarioDTO userDTO =  new UsuarioDTO ( usuario.getNome(), usuario.getCPF(), usuario.getEmail(),
+         UsuarioDTO userDTO =  new UsuarioDTO (usuario.getId(), usuario.getNome(), usuario.getCPF(), usuario.getEmail(),
                  usuario.getPassword(), usuario.getCargo());
-         users.add(userDTO);
+         users.add(userDTO );
+
+
 
 
     }

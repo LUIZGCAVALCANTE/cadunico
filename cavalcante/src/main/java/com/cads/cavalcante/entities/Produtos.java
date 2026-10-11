@@ -17,7 +17,7 @@ public class Produtos {
 
     }
 
-    public Produtos(String nome) {
+    public Produtos(Long id, String nome) {
         Nome = nome;
     }
 
@@ -32,6 +32,9 @@ public class Produtos {
         this.usuario= usuarios;
     }
 
+    public Long getId() {
+        return Id;
+    }
 
     public String getNome() {
         return Nome;

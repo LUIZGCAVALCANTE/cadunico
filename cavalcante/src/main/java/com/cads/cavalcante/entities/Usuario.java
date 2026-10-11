@@ -35,7 +35,7 @@ public class Usuario {
 
 
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name ="departamento_id")
     private Departamento departamento;
 
@@ -63,6 +63,7 @@ public class Usuario {
 
 
     public Usuario(String nome, String CPF, String email, String password, String cargo) {
+        id = id;
         Nome = nome;
         this.CPF = CPF;
         this.email = email;

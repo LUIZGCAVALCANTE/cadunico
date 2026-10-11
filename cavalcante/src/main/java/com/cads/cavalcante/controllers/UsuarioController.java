@@ -1,6 +1,9 @@
 package com.cads.cavalcante.controllers;
 
+import com.cads.cavalcante.DTO.DepartamentoDTO;
+import com.cads.cavalcante.DTO.UsuarioCadastroDTO;
 import com.cads.cavalcante.DTO.UsuarioDTO;
+import com.cads.cavalcante.services.DepartamentoService;
 import com.cads.cavalcante.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +15,18 @@ import java.util.List;
 public class UsuarioController {
         @Autowired
         UsuarioService userService;
+        @Autowired
+        DepartamentoService departService;
 
 
+    @PostMapping("/new")
+    public UsuarioDTO insert(
+            @RequestBody UsuarioCadastroDTO dto) {
 
-    @PostMapping ("/new")
-    public UsuarioDTO insert(@RequestBody UsuarioDTO userDTO){
-        return this.userService.insert(userDTO);
+        return userService.insert(
+                dto.getUsuario(),
+                dto.getDepartamento()
+        );
     }
 
 

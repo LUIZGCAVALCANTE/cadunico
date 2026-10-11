@@ -1,10 +1,13 @@
 package com.cads.cavalcante.DTO;
 
 import com.cads.cavalcante.entities.Usuario;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder({ "id", "Nome","CPF","email", "password", "cargo" })
 
 public class UsuarioDTO {
 
-
+    private Long id;
     private String Nome;
     private String CPF;
     private String email;
@@ -13,9 +16,9 @@ public class UsuarioDTO {
 
     public UsuarioDTO() {
     }
-    public UsuarioDTO( String Nome, String CPF, String email, String password, String cargo){
+    public UsuarioDTO(Long id, String Nome, String CPF, String email, String password, String cargo){
 
-
+    this. id = id;
     this.Nome= Nome;
     this.CPF = CPF;
     this.email= email;
@@ -26,12 +29,16 @@ public class UsuarioDTO {
 
 
     public UsuarioDTO(Usuario entity) {
-
+        id = entity.getId();
         Nome=entity.getNome();
         CPF = entity.getCPF();
         email=entity.getEmail();
         password=entity.getPassword();
         cargo=entity.getCargo();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
